@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Meta Tags -->
+    <title>Work Hours Calculator | Free Shift Pay & Earnings Tracker</title>
+    <meta name="description" content="Calculate your work hours and total earnings easily. Features include break time deduction, shift history, and earnings forecasting. Free, fast, and mobile-friendly.">
+    <meta name="keywords" content="work hours calculator, shift tracker, payroll calculator, earnings forecaster, track work pay, hourly wage calculator">
+    <meta name="author" content="Work Hours Calculator">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:title" content="Free Work Hours & Pay Tracker">
+    <meta property="og:description" content="Estimate your next paycheck and keep a log of all your shifts in one place.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yourusername.github.io/work-hours-calculator/">
+    <meta property="og:image" content="https://yourusername.github.io/work-hours-calculator/icon.png">
+    
+    <!-- PWA / Mobile -->
+    <meta name="theme-color" content="#4a90e2">
+    <link rel="apple-touch-icon" href="icon.png">
+    
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="icon.png">
+</head>
+<body>
+    <div class="app-container">
+        <h1>Work Hours Calculator</h1>
+
+        <div class="result-display" id="resultCard">
+            <span id="displayLabel">Total Earnings</span>
+            <strong id="mainTotal">$0.00</strong>
+            <div id="subDetail" style="font-size: 0.8rem; color: #4a90e2;">0 Days Selected</div>
+        </div>
+
+        <div class="row">
+            <div><label>Start Date:</label><input type="date" id="dateFrom" onchange="setMode('forecast')"></div>
+            <div><label>End Date:</label><input type="date" id="dateTo" onchange="setMode('forecast')"></div>
+        </div>
+        
+        <div class="row">
+            <div><label>Clock In:</label><input type="time" id="startTime" value="09:00" onchange="updateUI()"></div>
+            <div><label>Clock Out:</label><input type="time" id="endTime" value="17:00" onchange="updateUI()"></div>
+        </div>
+        <div class="row">
+            <div><label>Break (minutes):</label><input type="number" id="breakTime" value="0" min="0" max="1440" onchange="updateUI()"></div>
+            <div><label>Hourly Pay ($):</label><input type="number" id="hourlyRate" value="20" min="0" step="0.01" onchange="updateUI()"></div>
+        </div>
+
+        <button class="btn-primary btn-dark" onclick="generateRangeHistory()">CALCULATE TOTAL WORK HOURS</button>
+
+        <div id="historySection">
+            <div class="section-header">
+                Shift Records 
+                <div class="section-header-buttons">
+                    <button class="btn-copy" onclick="copyShiftRecords()">Copy</button>
+                    <button class="btn-clear" onclick="clearAllRecords()">Clear All</button>
+                </div>
+            </div>
+            <table id="historyTable">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Hours</th>
+                        <th>Pay</th>
+                    </tr>
+                </thead>
+                <tbody id="historyList"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="copyToast">Copied to clipboard!</div>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
